@@ -9,7 +9,7 @@ from ..models.book import Book
 class StorageBackend(Protocol):
     """
     Protocol defining the interface for storage backends.
-    
+
     This demonstrates the use of dependency injection and interface segregation.
     Different storage implementations (e.g., in-memory, file-based, database)
     can be used as long as they implement this protocol.
@@ -31,7 +31,7 @@ class StorageBackend(Protocol):
 class InMemoryStorage:
     """
     A simple in-memory storage implementation.
-    
+
     This class demonstrates a concrete implementation of the StorageBackend
     protocol, using a dictionary as the storage mechanism.
     """
@@ -55,14 +55,14 @@ class InMemoryStorage:
 class BookRepository:
     """
     Repository for managing book operations.
-    
+
     This class demonstrates:
     - Dependency injection (storage backend)
     - Single Responsibility Principle
     - Interface segregation
     - Clean method naming
     - Proper error handling
-    
+
     Example:
         >>> storage = InMemoryStorage()
         >>> repo = BookRepository(storage)
@@ -81,7 +81,7 @@ class BookRepository:
     def __init__(self, storage: Optional[StorageBackend] = None) -> None:
         """
         Initialize the repository with a storage backend.
-        
+
         Args:
             storage: Implementation of StorageBackend protocol
                     If None, uses InMemoryStorage
@@ -91,25 +91,25 @@ class BookRepository:
     def add_book(self, book: Book) -> None:
         """
         Add a book to the repository.
-        
+
         Args:
             book: The book to add
-            
+
         Raises:
             ValueError: If a book with the same ISBN already exists
         """
         if self.get_book_by_isbn(book.isbn) is not None:
             raise ValueError(f"Book with ISBN {book.isbn} already exists")
-        
+
         self._storage.save(book.isbn, self._book_to_dict(book))
 
     def get_book_by_isbn(self, isbn: str) -> Optional[Book]:
         """
         Retrieve a book by its ISBN.
-        
+
         Args:
             isbn: The ISBN to look up
-            
+
         Returns:
             The book if found, None otherwise
         """
@@ -119,7 +119,7 @@ class BookRepository:
     def delete_book(self, isbn: str) -> None:
         """
         Delete a book from the repository.
-        
+
         Args:
             isbn: The ISBN of the book to delete
         """
@@ -134,7 +134,7 @@ class BookRepository:
             "author": book.author,
             "publication_year": book.publication_year,
             "description": book.description,
-            "added_at": book.added_at.isoformat()
+            "added_at": book.added_at.isoformat(),
         }
 
     @staticmethod
@@ -146,5 +146,5 @@ class BookRepository:
             author=data["author"],
             publication_year=data["publication_year"],
             description=data["description"],
-            added_at=datetime.fromisoformat(data["added_at"])
-        ) 
+            added_at=datetime.fromisoformat(data["added_at"]),
+        )

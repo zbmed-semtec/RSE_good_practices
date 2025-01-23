@@ -17,7 +17,7 @@ from bookstore import (
 def sample_book() -> Book:
     """
     Fixture providing a valid book instance for testing.
-    
+
     Returns:
         Book: A sample book instance
     """
@@ -26,7 +26,7 @@ def sample_book() -> Book:
         title="Test Book",
         author="Test Author",
         publication_year=2020,
-        description="A book for testing"
+        description="A book for testing",
     )
 
 
@@ -34,7 +34,7 @@ def sample_book() -> Book:
 def repository() -> BookRepository:
     """
     Fixture providing a fresh repository instance for testing.
-    
+
     Returns:
         BookRepository: A new repository instance
     """
@@ -60,7 +60,7 @@ class TestBook:
                 isbn="invalid-isbn",
                 title="Test Book",
                 author="Test Author",
-                publication_year=2020
+                publication_year=2020,
             )
 
     def test_future_publication_year(self) -> None:
@@ -71,7 +71,7 @@ class TestBook:
                 isbn="978-0-7475-3269-9",
                 title="Test Book",
                 author="Test Author",
-                publication_year=future_year
+                publication_year=future_year,
             )
 
 
@@ -84,7 +84,7 @@ class TestBookRepository:
         """Test adding a book and retrieving it by ISBN."""
         repository.add_book(sample_book)
         retrieved_book = repository.get_book_by_isbn(sample_book.isbn)
-        
+
         assert retrieved_book is not None
         assert retrieved_book.isbn == sample_book.isbn
         assert retrieved_book.title == sample_book.title
@@ -94,15 +94,13 @@ class TestBookRepository:
     ) -> None:
         """Test that adding a duplicate book raises appropriate error."""
         repository.add_book(sample_book)
-        
+
         with pytest.raises(DuplicateBookError):
             repository.add_book(sample_book)
 
-    def test_delete_book(
-        self, repository: BookRepository, sample_book: Book
-    ) -> None:
+    def test_delete_book(self, repository: BookRepository, sample_book: Book) -> None:
         """Test deleting a book from the repository."""
         repository.add_book(sample_book)
         repository.delete_book(sample_book.isbn)
-        
-        assert repository.get_book_by_isbn(sample_book.isbn) is None 
+
+        assert repository.get_book_by_isbn(sample_book.isbn) is None

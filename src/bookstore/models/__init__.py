@@ -1,1 +1,1 @@
-"""Models package containing domain entities.""" 
+"""Models package containing domain entities."""

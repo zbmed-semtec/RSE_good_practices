@@ -9,11 +9,11 @@ from typing import Optional
 class Book:
     """
     Represents a book in the bookstore system.
-    
+
     This class demonstrates proper type hints, documentation, and validation.
     It uses the dataclass decorator to automatically generate special methods
     like __init__, __repr__, and __eq__.
-    
+
     Attributes:
         isbn (str): The International Standard Book Number (ISBN-13)
         title (str): The book's title
@@ -21,7 +21,7 @@ class Book:
         publication_year (int): Year when the book was published
         description (Optional[str]): A brief description of the book
         added_at (datetime): Timestamp when the book was added to the system
-    
+
     Example:
         >>> book = Book(
         ...     isbn="978-0-7475-3269-9",
@@ -42,7 +42,7 @@ class Book:
     def __post_init__(self) -> None:
         """
         Validates the book's attributes after initialization.
-        
+
         Raises:
             ValueError: If ISBN format is invalid or publication year is in the future
         """
@@ -52,7 +52,7 @@ class Book:
     def _validate_isbn(self) -> None:
         """
         Validates the ISBN format.
-        
+
         Raises:
             ValueError: If ISBN format is invalid
         """
@@ -64,26 +64,28 @@ class Book:
     def _validate_publication_year(self) -> None:
         """
         Validates that the publication year is not in the future.
-        
+
         Raises:
             ValueError: If publication year is in the future
         """
         current_year = datetime.now().year
         if self.publication_year > current_year:
-            raise ValueError(f"Publication year cannot be in the future: {self.publication_year}")
+            raise ValueError(
+                f"Publication year cannot be in the future: {self.publication_year}"
+            )
 
     def get_age(self) -> int:
         """
         Calculates the age of the book in years.
-        
+
         Returns:
             int: The number of years since the book was published
-        
+
         Example:
-            >>> book = Book(isbn="978-0-7475-3269-9", title="Example", 
+            >>> book = Book(isbn="978-0-7475-3269-9", title="Example",
             ...            author="Author", publication_year=2000)
             >>> current_year = datetime.now().year
             >>> book.get_age() == current_year - 2000
             True
         """
-        return datetime.now().year - self.publication_year 
+        return datetime.now().year - self.publication_year

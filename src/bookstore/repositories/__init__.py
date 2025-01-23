@@ -1,1 +1,1 @@
-"""Repositories package containing storage implementations.""" 
+"""Repositories package containing storage implementations."""

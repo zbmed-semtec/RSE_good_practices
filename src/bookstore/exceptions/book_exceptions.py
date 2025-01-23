@@ -11,7 +11,7 @@ class BookNotFoundError(BookstoreError):
     def __init__(self, isbn: str) -> None:
         """
         Initialize the exception.
-        
+
         Args:
             isbn: The ISBN that was not found
         """
@@ -24,7 +24,7 @@ class DuplicateBookError(BookstoreError):
     def __init__(self, isbn: str) -> None:
         """
         Initialize the exception.
-        
+
         Args:
             isbn: The duplicate ISBN
         """
@@ -37,7 +37,7 @@ class InvalidISBNError(BookstoreError):
     def __init__(self, isbn: str, reason: str) -> None:
         """
         Initialize the exception.
-        
+
         Args:
             isbn: The invalid ISBN
             reason: The reason why the ISBN is invalid
@@ -51,9 +51,9 @@ class InvalidPublicationYearError(BookstoreError):
     def __init__(self, year: int, reason: str) -> None:
         """
         Initialize the exception.
-        
+
         Args:
             year: The invalid publication year
             reason: The reason why the year is invalid
         """
-        super().__init__(f"Invalid publication year {year}: {reason}") 
+        super().__init__(f"Invalid publication year {year}: {reason}")

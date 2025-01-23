@@ -31,4 +31,4 @@ __all__ = [
     "DuplicateBookError",
     "InvalidISBNError",
     "InvalidPublicationYearError",
-] 
+]

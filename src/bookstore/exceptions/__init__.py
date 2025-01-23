@@ -1,1 +1,1 @@
-"""Exceptions package containing custom error types.""" 
+"""Exceptions package containing custom error types."""
