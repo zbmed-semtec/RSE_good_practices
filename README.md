@@ -1,5 +1,10 @@
 # Bookstore Package
 
+[![Tests](https://github.com/ZBMED/bookstore/actions/workflows/test.yml/badge.svg)](https://github.com/ZBMED/bookstore/actions/workflows/test.yml)
+[![Lint](https://github.com/ZBMED/bookstore/actions/workflows/lint.yml/badge.svg)](https://github.com/ZBMED/bookstore/actions/workflows/lint.yml)
+[![codecov](https://codecov.io/gh/ZBMED/bookstore/branch/main/graph/badge.svg)](https://codecov.io/gh/ZBMED/bookstore)
+[![PyPI version](https://badge.fury.io/py/bookstore.svg)](https://badge.fury.io/py/bookstore)
+
 A demonstration package for teaching Python best practices. This package implements a simple book management system to illustrate:
 
 - Clean code principles
@@ -121,46 +126,26 @@ PR Learning Points:
 ## Branch handling
 It is important to know how to hadle and operate with branches.
 
-### Naming Convention
-- feature/   - For new features
-- bugfix/    - For bug fixes
-- hotfix/    - For urgent fixes
-- refactor/  - For code improvements
-- docs/      - For documentation changes
-- test/      - For test additions
+## Contributing
+Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information on how to contribute to this project.
 
-### Workflow
-You can start the workflow by forking the repository and then cloning it to your local machine, but it depends on the access you have to the repository.
+### PR Template
+Please refer to the [PR Template](.github/pull_request_template.md) on the expected format for PRs.
 
-1. Create a new branch
-```bash
-git checkout -b feature/book-categories
-```
+## Continuous Integration
 
-2. Make changes
+This project uses GitHub Actions for continuous integration and deployment:
 
-3. Commit changes
+- **Testing**: Automated tests run on multiple Python versions (3.8-3.11)
+- **Code Coverage**: Coverage reports are uploaded to Codecov
+- **Linting**: Code quality checks using Black, isort, mypy, and pylint
+- **Publishing**: Automatic package publishing to PyPI on new releases
 
-For commit messages remember to start with a git emoji and then a short description of the changes. You can find a list of emojis here: https://gitmoji.dev/.
+### Status Checks
 
-Remember to always start with a verb and then the changes.
-
-```bash
-git commit -m "✨ Add book categories"
-```
-
-4. Push changes
-```bash
-git push origin feature/book-categories
-```
-
-5. Create a pull request
-6. Merge pull request
-
-## PR Best Practices
-- Keep changes focused and small
-- Write clear commit messages (using conventional commits)
-- Include tests for new functionality
-- Update documentation
-- Respond to review comments promptly
-- Squash commits before merging if needed
+Before merging a PR, ensure all status checks pass:
+1. All tests pass across Python versions
+2. Code coverage meets minimum threshold (90%)
+3. Code follows style guidelines (Black, isort)
+4. No type checking errors (mypy)
+5. No linting issues (pylint)
