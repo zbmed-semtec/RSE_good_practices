@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bookstore"
+version = "0.1.0"
+description = "A demonstration package for teaching Python best practices"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    {name = "RSE Team"}
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "mypy>=1.0"
+] 
