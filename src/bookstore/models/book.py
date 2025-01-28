@@ -61,7 +61,9 @@ class Book:
         # Remove hyphens and spaces for validation
         clean_isbn = self.isbn.replace("-", "").replace(" ", "")
         if not (len(clean_isbn) == 13 and clean_isbn.isdigit()):
-            raise InvalidISBNError(self.isbn, "ISBN must be 13 digits (excluding hyphens and spaces)")
+            raise InvalidISBNError(
+                self.isbn, "ISBN must be 13 digits (excluding hyphens and spaces)"
+            )
 
     def _validate_publication_year(self) -> None:
         """
@@ -73,8 +75,7 @@ class Book:
         current_year = datetime.now().year
         if self.publication_year > current_year:
             raise InvalidPublicationYearError(
-                self.publication_year,
-                "Publication year cannot be in the future"
+                self.publication_year, "Publication year cannot be in the future"
             )
 
     def get_age(self) -> int:
