@@ -1,9 +1,9 @@
 # Bookstore Package
 
-[![Tests](https://github.com/ZBMED/bookstore/actions/workflows/test.yml/badge.svg)](https://github.com/ZBMED/bookstore/actions/workflows/test.yml)
-[![Lint](https://github.com/ZBMED/bookstore/actions/workflows/lint.yml/badge.svg)](https://github.com/ZBMED/bookstore/actions/workflows/lint.yml)
-[![codecov](https://codecov.io/gh/ZBMED/bookstore/branch/main/graph/badge.svg)](https://codecov.io/gh/ZBMED/bookstore)
-[![PyPI version](https://badge.fury.io/py/bookstore.svg)](https://badge.fury.io/py/bookstore)
+[![Tests](https://github.com/zbmed-semtec/RSE_good_practices/actions/workflows/test.yml/badge.svg)](https://github.com/zbmed-semtec/RSE_good_practices/actions/workflows/test.yml)
+[![Lint](https://github.com/zbmed-semtec/RSE_good_practices/actions/workflows/lint.yml/badge.svg)](https://github.com/zbmed-semtec/RSE_good_practices/actions/workflows/lint.yml)
+[![codecov](https://github.com/zbmed-semtec/RSE_good_practices/branch/main/graph/badge.svg)](https://codecov.io/gh/ZBMED/zbmed-bookstore)
+[![PyPI version](https://badge.fury.io/py/zbmed-bookstore.svg)](https://badge.fury.io/py/zbmed-bookstore)
 
 A demonstration package for teaching Python best practices. This package implements a simple book management system to illustrate:
 
