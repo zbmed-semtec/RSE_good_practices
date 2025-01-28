@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
+from ..exceptions.book_exceptions import InvalidISBNError, InvalidPublicationYearError
+
 
 @dataclass
 class Book:
@@ -54,24 +56,25 @@ class Book:
         Validates the ISBN format.
 
         Raises:
-            ValueError: If ISBN format is invalid
+            InvalidISBNError: If ISBN format is invalid
         """
         # Remove hyphens and spaces for validation
         clean_isbn = self.isbn.replace("-", "").replace(" ", "")
         if not (len(clean_isbn) == 13 and clean_isbn.isdigit()):
-            raise ValueError("ISBN must be 13 digits (excluding hyphens and spaces)")
+            raise InvalidISBNError(self.isbn, "ISBN must be 13 digits (excluding hyphens and spaces)")
 
     def _validate_publication_year(self) -> None:
         """
         Validates that the publication year is not in the future.
 
         Raises:
-            ValueError: If publication year is in the future
+            InvalidPublicationYearError: If publication year is in the future
         """
         current_year = datetime.now().year
         if self.publication_year > current_year:
-            raise ValueError(
-                f"Publication year cannot be in the future: {self.publication_year}"
+            raise InvalidPublicationYearError(
+                self.publication_year,
+                "Publication year cannot be in the future"
             )
 
     def get_age(self) -> int:

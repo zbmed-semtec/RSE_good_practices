@@ -3,6 +3,7 @@
 from datetime import datetime
 from typing import Dict, List, Optional, Protocol
 
+from ..exceptions.book_exceptions import DuplicateBookError
 from ..models.book import Book
 
 
@@ -96,10 +97,10 @@ class BookRepository:
             book: The book to add
 
         Raises:
-            ValueError: If a book with the same ISBN already exists
+            DuplicateBookError: If a book with the same ISBN already exists
         """
         if self.get_book_by_isbn(book.isbn) is not None:
-            raise ValueError(f"Book with ISBN {book.isbn} already exists")
+            raise DuplicateBookError(book.isbn)
 
         self._storage.save(book.isbn, self._book_to_dict(book))
 
