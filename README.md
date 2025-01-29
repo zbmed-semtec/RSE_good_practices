@@ -4,6 +4,8 @@
 [![Lint](https://github.com/zbmed-semtec/RSE_good_practices/actions/workflows/lint.yml/badge.svg)](https://github.com/zbmed-semtec/RSE_good_practices/actions/workflows/lint.yml)
 [![codecov](https://github.com/zbmed-semtec/RSE_good_practices/branch/main/graph/badge.svg)](https://codecov.io/gh/ZBMED/zbmed-bookstore)
 [![PyPI version](https://badge.fury.io/py/zbmed-bookstore.svg)](https://badge.fury.io/py/zbmed-bookstore)
+[![Google Slides](https://img.shields.io/badge/Presentation-Mini%20Hackathon-purple)](https://docs.google.com/presentation/d/1ezF3WL1kR0J2lEt98TTzusaUBnCQYRoiEwdxfzzmKTo/preview)  
+
 
 A demonstration package for teaching Python best practices. This package implements a simple book management system to illustrate:
 
