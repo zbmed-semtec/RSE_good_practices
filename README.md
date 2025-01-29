@@ -78,34 +78,44 @@ This is an educational project. Feel free to fork and experiment, but we have so
 
 ## Tasks 1
 Add Book Categories/Genres
+
 Branch name: feature/book-categories
+
 Scope:
 - Add category field to Book class
 - Add category validation
 - Update repository to search by category
+
 PR Learning Points:
 - Single responsibility principle
 - Database schema changes
 - Test coverage for new field
 
 ## Tasks 2
-Book Search Functionality
+Add Book Search Functionality
+
 Branch name: feature/search-books
+
 Scope:
 - Add search by title/author
 - Implement fuzzy matching
 - Add search result pagination
+
 PR Learning Points:
 - Algorithm implementation
 - Performance considerations
 - Documentation of search parameters
 
 ## Tasks 3
+Add Book rating
+
 Branch name: feature/book-ratings
+
 Scope:
 - Add Rating class
 - Implement rating statistics
 - Add rating constraints (1-5 stars)
+
 PR Learning Points:
 - Relationship between models
 - Data validation
@@ -113,11 +123,14 @@ PR Learning Points:
 
 ## Tasks 4
 Add Book Import/Export
+
 Branch name: feature/import-export
+
 Scope:
 - CSV import/export
 - JSON serialization
 - Data validation
+
 PR Learning Points:
 - File handling
 - Data formats
