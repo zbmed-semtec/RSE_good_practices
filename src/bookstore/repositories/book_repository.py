@@ -30,6 +30,10 @@ class StorageBackend(Protocol):
         """Load data for the given key."""
         ...
 
+    def loadAll(self, key: str) -> Optional[dict]:
+        """Load data for the given key."""
+        ...
+
     def delete(self, key: str) -> None:
         """Delete data for the given key."""
         ...
