@@ -20,4 +20,5 @@ dev = [
     "black>=22.0",
     "isort>=5.0",
     "mypy>=1.0"
+    "pandas>=2.1.1"
 ] 
