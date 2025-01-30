@@ -3,7 +3,7 @@ requires = ["setuptools>=64.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "bookstore"
+name = "nelson_semtec_bookstore"
 version = "0.1.0"
 description = "A demonstration package for teaching Python best practices"
 readme = "README.md"
