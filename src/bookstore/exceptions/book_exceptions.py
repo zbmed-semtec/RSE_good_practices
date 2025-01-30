@@ -57,3 +57,15 @@ class InvalidPublicationYearError(BookstoreError):
             reason: The reason why the year is invalid
         """
         super().__init__(f"Invalid publication year {year}: {reason}")
+
+class InvalidRatingError(BookstoreError):
+    """Raised when an invalid rating is provided."""
+    def __init__(self, rating: int, reason: str) -> None:
+        """
+        Initialize the exception.
+
+        Args:
+            rating: The invalid rating for the book
+            reason: The reason why the rating is invalid
+        """
+        super().__init__(f"Invalid Rating {rating}: {reason}")

@@ -149,3 +149,68 @@ class BookRepository:
             description=data["description"],
             added_at=datetime.fromisoformat(data["added_at"]),
         )
+
+
+class RatingRepository:
+    """
+    Repository for managing book ratings.
+    """
+    def __init__(self, storage: Optional[StorageBackend] = None) -> None:
+        """
+        Initialize the repository with a rating storage backend.
+
+        Args:
+            storage: Implementation of StorageBackend protocol
+                    If None, uses InMemoryStorage
+        """
+        self._ratings = InMemoryStorage()
+        self._ratings = self._ratings._storage
+    
+    def add_rating(self, rating: int) -> None:
+        """
+        Adds rating for the book if it does not exist in the rating 
+        storage or appends it to the rating of the existing book.
+
+        Args:
+            rating: The rating of the book
+        """
+        book_isbn = rating.isbn
+        if book_isbn in self._ratings.keys():
+            self._ratings[book_isbn].append(rating)
+        else:
+            self._ratings[book_isbn] = [rating]
+
+    def get_rating(self, book_isbn: int) -> List:
+        """
+        Retrieves all the ratings of the input book
+
+        Args:
+            book_isbn: The ISBN of the book
+        
+        Returns:
+            all_ratings: List of all ratings for the book
+        """
+        all_ratings = []
+        for rating in self._ratings.get(book_isbn):
+            all_ratings.append(rating.rating)
+        return all_ratings
+
+    def get_rating_stats(self, book_isbn: int) -> int:
+        """
+        Calculates the rating statistics of the book by averaging
+        across all the ratings of the book.
+
+        Args:
+            book_isbn: The ISBN of the book
+        
+        Returns:
+            The rating stats of the book
+        """
+        all_ratings = self.get_rating(book_isbn)
+        if len(all_ratings) == 1:
+            rating_stats = all_ratings
+        elif len(all_ratings) >1:
+            rating_stats = sum(all_ratings)/len(all_ratings)
+        else:
+            rating_stats = 0
+        return rating_stats

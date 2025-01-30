@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 
-from ..exceptions.book_exceptions import InvalidISBNError, InvalidPublicationYearError
+from ..exceptions.book_exceptions import InvalidISBNError, InvalidPublicationYearError, InvalidRatingError
 
 
 @dataclass
@@ -93,3 +93,42 @@ class Book:
             True
         """
         return datetime.now().year - self.publication_year
+
+
+class Rating:
+    """
+    Represents the rating for a given book in the bookstore system.
+
+    This class demonstrates proper type hints, documentation.
+
+    Attributes:
+        isbn (str): The International Standard Book Number (ISBN-13).
+        id (int): The identifier for the particular rating of the book.
+        rating (int): The rating for the book.
+        
+    Example:
+        >>> rating = Rating(
+        ...     isbn="978-0-7475-3269-9",
+        ...     id=1,
+        ...     rating=3
+        ... )
+    """
+    
+    def __init__(self, isbn: str, id: int, rating: int) -> None: 
+        """
+        Initialize the rating epository with a book rating.
+
+        Args:
+            isbn : The International Standard Book Number (ISBN-13).
+            id : The identifier for the particular rating of the book.
+            rating : The rating for the book.
+        """
+        self.isbn = isbn
+        self.id = id
+        self.rating = rating
+        
+        if not (0 <= self.rating <= 5):
+            raise InvalidRatingError(
+                self.rating, "Rating must be between 0 and 5"
+            )
+    
