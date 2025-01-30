@@ -2,6 +2,7 @@
 
 from typing import TextIO
 
+
 class BookstoreError(Exception):
     """Base exception class for all bookstore-related errors."""
 
@@ -59,6 +60,7 @@ class InvalidPublicationYearError(BookstoreError):
         """
         super().__init__(f"Invalid publication year {year}: {reason}")
 
+
 class BooksCSVEmpty(BookstoreError):
     """Raised when the imported books csv is empty."""
 
@@ -67,6 +69,7 @@ class BooksCSVEmpty(BookstoreError):
         Initialize the exception.
         """
         super().__init__(f"The imported books CSV is empty")
+
 
 class InvalidCSVHeader(BookstoreError):
     """Raised when CSV header does not correspond to any book property labels"""
@@ -78,7 +81,10 @@ class InvalidCSVHeader(BookstoreError):
         Args:
             header: The invalid header content
         """
-        super().__init__(f"The CSV header of { header } is not corresponding to any book properties")
+        super().__init__(
+            f"The CSV header of { header } is not corresponding to any book properties"
+        )
+
 
 class InvalidCSV(BookstoreError):
     """Raised when the CSV content is invalid and can't be parsed"""

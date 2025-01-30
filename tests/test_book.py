@@ -33,6 +33,7 @@ def sample_book() -> Book:
         description="A book for testing",
     )
 
+
 @pytest.fixture
 def sample_books_csv() -> TextIO:
     """
@@ -41,7 +42,8 @@ def sample_books_csv() -> TextIO:
     Returns:
         TextIO: TextIO content of the dummy books CSV file.
     """
-    return open('resources/dummy_books.csv', 'r')
+    return open("resources/dummy_books.csv", "r")
+
 
 @pytest.fixture
 def sample_books_isbn() -> list[str]:
@@ -51,9 +53,10 @@ def sample_books_isbn() -> list[str]:
     Returns:
         list[str]: list of strings containing isbn values.
     """
-    csv_file = open('resources/dummy_books.csv', 'r')
+    csv_file = open("resources/dummy_books.csv", "r")
     books_df = pd.read_csv(csv_file)
-    return(books_df["isbn"].to_list())
+    return books_df["isbn"].to_list()
+
 
 @pytest.fixture
 def repository() -> BookRepository:
@@ -130,12 +133,17 @@ class TestBookRepository:
 
         assert repository.get_book_by_isbn(sample_book.isbn) is None
 
-    def test_import_books(self, repository: BookRepository, sample_books_csv: TextIO, sample_books_isbn: list[str]) -> None:
+    def test_import_books(
+        self,
+        repository: BookRepository,
+        sample_books_csv: TextIO,
+        sample_books_isbn: list[str],
+    ) -> None:
         """Test importing of books csv"""
         repository._import_book_csv(sample_books_csv)
         found_all_isbn = True
         for isbn in sample_books_isbn:
             if repository.get_book_by_isbn(isbn) == None:
                 found_all_isbn = False
-        
+
         assert found_all_isbn is True

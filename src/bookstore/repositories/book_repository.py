@@ -4,7 +4,12 @@ from datetime import datetime
 import pandas as pd
 from typing import Dict, List, Optional, Protocol, TextIO
 
-from ..exceptions.book_exceptions import DuplicateBookError, BooksCSVEmpty, InvalidCSV, InvalidCSVHeader
+from ..exceptions.book_exceptions import (
+    DuplicateBookError,
+    BooksCSVEmpty,
+    InvalidCSV,
+    InvalidCSVHeader,
+)
 from ..models.book import Book
 
 
@@ -160,7 +165,7 @@ class BookRepository:
                 case _:
                     continue
         return book
-    
+
     @staticmethod
     def _import_book_csv(csv_file: TextIO) -> Book:
         """Stores a list of books for a given CSV as books."""
@@ -177,6 +182,6 @@ class BookRepository:
             raise BooksCSVEmpty()
         for key in books_dict:
             book = BookRepository._dict_to_book(books_dict[key])
-            if(book.isbn == None):
+            if book.isbn == None:
                 raise InvalidCSVHeader(books_csv_header)
             BookRepository.add_book(BookRepository, book)
