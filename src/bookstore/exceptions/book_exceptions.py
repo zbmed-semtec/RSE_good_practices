@@ -58,8 +58,10 @@ class InvalidPublicationYearError(BookstoreError):
         """
         super().__init__(f"Invalid publication year {year}: {reason}")
 
+
 class InvalidRatingError(BookstoreError):
     """Raised when an invalid rating is provided."""
+
     def __init__(self, rating: int, reason: str) -> None:
         """
         Initialize the exception.
