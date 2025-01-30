@@ -33,7 +33,7 @@ class Book:
         ...     description="The first book in the Harry Potter series"
         ... )
     """
-
+    
     isbn: str
     title: str
     author: str
@@ -48,6 +48,12 @@ class Book:
         Raises:
             ValueError: If ISBN format is invalid or publication year is in the future
         """
+        if self.isbn == "" or self.isbn is None:
+            raise ValueError("ISBN cannot be empty")
+        
+        if self.title == "" or self.title is None:
+            raise ValueError("Title cannot be empty")
+        
         self._validate_isbn()
         self._validate_publication_year()
 
