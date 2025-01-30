@@ -138,7 +138,7 @@ class BookRepository:
 
     def import_book_csv(self, csv_file: TextIO) -> None:
         """Stores a list of books for a given CSV as books.
-        
+
         Args:
             csv_file: The CSV file text content of the books CSV.
 
@@ -175,7 +175,7 @@ class BookRepository:
             "description": book.description,
             "added_at": book.added_at.isoformat(),
         }
-    
+
     @staticmethod
     def _dict_to_book(data: dict) -> Book:
         """Convert a dictionary to a Book object."""
