@@ -42,7 +42,7 @@ def sample_books_csv() -> TextIO:
     Returns:
         TextIO: TextIO content of the dummy books CSV file.
     """
-    return open("resources/dummy_books.csv", "r")
+    return open("tests/resources/dummy_books.csv", "r")
 
 
 @pytest.fixture
@@ -53,7 +53,7 @@ def sample_books_isbn() -> list[str]:
     Returns:
         list[str]: list of strings containing isbn values.
     """
-    csv_file = open("resources/dummy_books.csv", "r")
+    csv_file = open("tests/resources/dummy_books.csv", "r")
     books_df = pd.read_csv(csv_file)
     return books_df["isbn"].to_list()
 
@@ -140,7 +140,7 @@ class TestBookRepository:
         sample_books_isbn: list[str],
     ) -> None:
         """Test importing of books csv"""
-        repository._import_book_csv(sample_books_csv)
+        repository.import_book_csv(sample_books_csv)
         found_all_isbn = True
         for isbn in sample_books_isbn:
             if repository.get_book_by_isbn(isbn) == None:

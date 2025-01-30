@@ -136,6 +136,34 @@ class BookRepository:
         """
         self._storage.delete(isbn)
 
+    def import_book_csv(self, csv_file: TextIO) -> None:
+        """Stores a list of books for a given CSV as books.
+        
+        Args:
+            csv_file: The CSV file text content of the books CSV.
+
+        Raises:
+            InvalidCSVError: If the CSV cannot be parsed for any reason
+            BooksCSVEmpty: If the CSV does not contain any books to import
+            InvalidCSVHeader: If the CSV header is missing or does not contain an ISBN
+        """
+        books_dict = None
+        books_csv_header = None
+        try:
+            books_df = pd.read_csv(csv_file)
+            books_csv_header = books_df.columns
+            books_df.columns = map(str.lower, books_csv_header)
+            books_dict = books_df.T.to_dict()
+        except:
+            raise InvalidCSV(csv_file)
+        if len(books_dict) == 0:
+            raise BooksCSVEmpty()
+        for key in books_dict:
+            book = BookRepository._dict_to_book(books_dict[key])
+            if book.isbn == None:
+                raise InvalidCSVHeader(books_csv_header)
+            self.add_book(book)
+
     @staticmethod
     def _book_to_dict(book: Book) -> dict:
         """Convert a Book object to a dictionary."""
@@ -147,45 +175,15 @@ class BookRepository:
             "description": book.description,
             "added_at": book.added_at.isoformat(),
         }
-
+    
     @staticmethod
     def _dict_to_book(data: dict) -> Book:
         """Convert a dictionary to a Book object."""
-        book = Book()
-        for properties_book in data:
-            match properties_book.key:
-                case "isbn":
-                    book.isbn = properties_book.value
-                case "title":
-                    book.title = properties_book.title
-                case "author":
-                    book.author = properties_book.author
-                case "publication_year":
-                    book.publication_year = properties_book.publication_year
-                case "description":
-                    book.description = properties_book.description
-                case "added_at":
-                    book.added_at = datetime.fromisoformat(properties_book.added_at)
-                case _:
-                    continue
-        return book
-
-    @staticmethod
-    def _import_book_csv(csv_file: TextIO) -> Book:
-        """Stores a list of books for a given CSV as books."""
-        books_dict = None
-        books_csv_header = None
-        try:
-            books_df = pd.read_csv(csv_file)
-            books_csv_header = books_df.columns
-            books_df.columns = map(str.lower, books_csv_header)
-            books_dict = books_df.T.to_dict()
-        except:
-            raise InvalidCSV(csv_file)
-        if len(books_dict == 0):
-            raise BooksCSVEmpty()
-        for key in books_dict:
-            book = BookRepository._dict_to_book(books_dict[key])
-            if book.isbn == None:
-                raise InvalidCSVHeader(books_csv_header)
-            BookRepository.add_book(BookRepository, book)
+        return Book(
+            isbn=data["isbn"],
+            title=data["title"],
+            author=data["author"],
+            publication_year=data["publication_year"],
+            description=data["description"],
+            added_at=datetime.fromisoformat(data["added_at"]),
+        )
