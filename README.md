@@ -15,6 +15,7 @@ A demonstration package for teaching Python best practices. This package impleme
 - Comprehensive documentation
 - Type hints
 - Testing practices
+- 
 
 ## Project Structure
 
