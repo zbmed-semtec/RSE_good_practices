@@ -141,6 +141,28 @@ class BookRepository:
     @staticmethod
     def _dict_to_book(data: dict) -> Book:
         """Convert a dictionary to a Book object."""
+        book = Book()
+        for properties_book in data:
+            match properties_book.key:
+                case "isbn":
+                    book.isbn = properties_book.value
+                case "title":
+                    book.isbn = properties_book.title
+                case "author":
+                    book.isbn = properties_book.author
+                case "publication_year":
+                    book.isbn = properties_book.publication_year
+                case "description":
+                    book.isbn = properties_book.description
+                case "added_at":
+                    book.isbn = datetime.fromisoformat(properties_book.added_at)
+                case _:
+                    continue
+        return book
+        
+    @staticmethod
+    def _dict_to_book(data: dict) -> Book:
+        """Convert a dictionary to a Book object."""
         return Book(
             isbn=data["isbn"],
             title=data["title"],
@@ -149,3 +171,4 @@ class BookRepository:
             description=data["description"],
             added_at=datetime.fromisoformat(data["added_at"]),
         )
+    
