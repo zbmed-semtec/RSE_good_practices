@@ -1,9 +1,10 @@
 """Repository module for managing book storage and retrieval operations."""
 
 from datetime import datetime
-from typing import Dict, List, Optional, Protocol
+import pandas as pd
+from typing import Dict, List, Optional, Protocol, TextIO
 
-from ..exceptions.book_exceptions import DuplicateBookError
+from ..exceptions.book_exceptions import DuplicateBookError, BooksCSVEmpty, InvalidCSV, InvalidCSVHeader
 from ..models.book import Book
 
 
@@ -147,28 +148,35 @@ class BookRepository:
                 case "isbn":
                     book.isbn = properties_book.value
                 case "title":
-                    book.isbn = properties_book.title
+                    book.title = properties_book.title
                 case "author":
-                    book.isbn = properties_book.author
+                    book.author = properties_book.author
                 case "publication_year":
-                    book.isbn = properties_book.publication_year
+                    book.publication_year = properties_book.publication_year
                 case "description":
-                    book.isbn = properties_book.description
+                    book.description = properties_book.description
                 case "added_at":
-                    book.isbn = datetime.fromisoformat(properties_book.added_at)
+                    book.added_at = datetime.fromisoformat(properties_book.added_at)
                 case _:
                     continue
         return book
-        
-    @staticmethod
-    def _dict_to_book(data: dict) -> Book:
-        """Convert a dictionary to a Book object."""
-        return Book(
-            isbn=data["isbn"],
-            title=data["title"],
-            author=data["author"],
-            publication_year=data["publication_year"],
-            description=data["description"],
-            added_at=datetime.fromisoformat(data["added_at"]),
-        )
     
+    @staticmethod
+    def _import_book_csv(csv_file: TextIO) -> Book:
+        """Stores a list of books for a given CSV as books."""
+        books_dict = None
+        books_csv_header = None
+        try:
+            books_df = pd.read_csv(csv_file)
+            books_csv_header = books_df.columns
+            books_df.columns = map(str.lower, books_csv_header)
+            books_dict = books_df.T.to_dict()
+        except:
+            raise InvalidCSV(csv_file)
+        if len(books_dict == 0):
+            raise BooksCSVEmpty()
+        for key in books_dict:
+            book = BookRepository._dict_to_book(books_dict[key])
+            if(book.isbn == None):
+                raise InvalidCSVHeader(books_csv_header)
+            BookRepository.add_book(BookRepository, book)
